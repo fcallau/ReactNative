@@ -9,7 +9,7 @@ export function configureAxios() {
 
 export function fetch(url) {
 	// '/characters?nameStartsWith=Ab&apikey=' + publicApiKey
-	const urlWithPublicApiKey = url + '?limit=10&offset=3&apikey=' + constants.PUBLIC_API_KEY
+	const urlWithPublicApiKey = url + '?limit=100&offset=0&apikey=' + constants.PUBLIC_API_KEY
 
 	return new Promise(function (resolve, reject) {
 		axios.get(urlWithPublicApiKey)

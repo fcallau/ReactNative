@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
+
 import axios from 'axios'
 // import marvelApi from 'marvel-comics-api'
 // import { AsyncCalls, Colors } from 'fcallauPractReactNative/src/commons'
