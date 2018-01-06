@@ -1,5 +1,7 @@
 import axios from 'axios'
 // import marvelApi from 'marvel-comics-api'
+import * as constants from 'fcallauPractReactNative/src/webservices/constants'
+// import * as constants from '../webservices/constants'
 
 export function configure() {
 	/*axios.defaults.baseURL = 'https://gateway.marvel.com/v1/public';
@@ -9,6 +11,7 @@ export function configure() {
 
 export function fetchCharacters(publicApiKey) {
 	const url = '/characters?apikey=' + publicApiKey
+	// const url = '/characters?apikey=' + constants.PUBLIC_API_KEY
 	// let url = '/characters?apikey=' + publicApiKey
 	// const url = '/characters?nameStartsWith=Ab&apikey=' + publicApiKey
 	console.log('axios.defaults.baseURL: ', axios.defaults.baseURL)

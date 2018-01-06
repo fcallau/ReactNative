@@ -1,45 +1,48 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList, StyleSheet } from 'react-native'
+import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
 import axios from 'axios'
 // import marvelApi from 'marvel-comics-api'
-import { AsyncCalls, Colors } from 'fcallauPractReactNative/src/commons'
+// import { AsyncCalls, Colors } from 'fcallauPractReactNative/src/commons'
+// import * as constants from 'fcallauPractReactNative/src/webservices/constants'
+import { fetch } from 'fcallauPractReactNative/src/webservices/webservices'
+import CharacterCell from './CharacterCell'
 
 export default class CharactersList extends Component {
 
 	constructor(props) {
 		super(props)
 		this.state = {
-			list: []
+			list: [],
+			selected: null
 		}
 	}
 
 	componentWillMount() {
-		// AsyncCalls.configure()
-		AsyncCalls.fetchCharacters('008abb5088d79a81730f1f91339609a4').then(
-			(response) => {
-				const nuestraLista = response.data.data.results && response.data.data.results ? response.data.data.results : []
-				this.setState({ list: nuestraLista })
-			}
-		).catch(
-			(error) => {
+		fetch('/characters')
+			.then((response) => {
+				this.setState({ list: response.data.results })
+			})
+			.catch((error) => {
 				console.log("fetch error: ", error)
-			}
-			)
+			})
+	}
+
+	onSelect(character) {
+		this.setState({ selected: character })
 	}
 
 	renderItem(item, index) {
 		return (
-			<View style={{ height: 200, backgroundColor: Colors.red, marginVertical: 10 }}>
-				<Text>{item.name}</Text>
-				<Text>{item.description}</Text>
-				<Text>{index}</Text>
-			</View>
+			<CharacterCell
+				item={item}
+				onSelect={(character) => this.onSelect(character)}
+			/>
 		)
 	}
 
 	render() {
 		return (
-			<View>
+			<View style={styles.container}>
 				<FlatList
 					data={this.state.list}
 					renderItem={({ item, index }) => this.renderItem(item, index)}
@@ -52,8 +55,8 @@ export default class CharactersList extends Component {
 }
 
 const styles = StyleSheet.create({
-	xx: {
-		height: 100,
-		marginVertical: 20
-	}
+	container: {
+		flex: 1,
+		backgroundColor: '#666',
+	},
 })
