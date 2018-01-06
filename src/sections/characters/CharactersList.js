@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, FlatList, StyleSheet } from 'react-native'
 import axios from 'axios'
-import marvelApi from 'marvel-comics-api'
+// import marvelApi from 'marvel-comics-api'
+import { AsyncCalls, Colors } from 'fcallauPractReactNative/src/commons'
 
 export default class CharactersList extends Component {
 
@@ -13,56 +14,46 @@ export default class CharactersList extends Component {
 	}
 
 	componentWillMount() {
-		console.log('componentWillMount')
-
-		/*configure()
-
-		fetchCharacters('008abb5088d79a81730f1f91339609a4')*/
-
-		marvelApi('characters', {
-			publicKey: '008abb5088d79a81730f1f91339609a4',
-			timeout: 4000,
-			query: {
-				limit: 50
-			},
-			headers: {
-				Referer: 'http://fcallau.com'
+		// AsyncCalls.configure()
+		AsyncCalls.fetchCharacters('008abb5088d79a81730f1f91339609a4').then(
+			(response) => {
+				const nuestraLista = response.data.data.results && response.data.data.results ? response.data.data.results : []
+				this.setState({ list: nuestraLista })
 			}
-		}, function (err, body) {
-			if (err) throw err
+		).catch(
+			(error) => {
+				console.log("fetch error: ", error)
+			}
+			)
+	}
 
-			// total # of items
-			console.log('body.data.total: ', body.data.total)
-
-			// array of characters
-			console.log('body.data.results: ', body.data.results)
-
-			const list = body.data && body.data.results ? body.data.results : []
-
-			this.setState({ list: list })
-		})
+	renderItem(item, index) {
+		return (
+			<View style={{ height: 200, backgroundColor: Colors.red, marginVertical: 10 }}>
+				<Text>{item.name}</Text>
+				<Text>{item.description}</Text>
+				<Text>{index}</Text>
+			</View>
+		)
 	}
 
 	render() {
 		return (
 			<View>
-				<Text>{'Texto prueba'}</Text>
+				<FlatList
+					data={this.state.list}
+					renderItem={({ item, index }) => this.renderItem(item, index)}
+					keyExtractor={(item, index) => item.id}
+					extraData={this.state}
+				/>
 			</View>
 		)
 	}
 }
 
-export function configure() {
-	axios.defaults.baseURL = 'https://gateway.marvel.com/v1/public';
-	axios.defaults.headers.post['Content-Type'] = 'application/json';
-	axios.defaults.headers.common['Referer'] = 'http://fcallau.com';
-}
-
-export function fetchCharacters(publicApiKey) {
-	const url = '/characters?apikey=' + publicApiKey
-	axios.get(url).then((response) => {
-		console.log("fetch respone: ", response)
-	}).catch((error) => {
-		console.log("fetch error: ", error)
-	})
-}
+const styles = StyleSheet.create({
+	xx: {
+		height: 100,
+		marginVertical: 20
+	}
+})
