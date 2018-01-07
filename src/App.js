@@ -7,6 +7,7 @@ import { Colors } from 'fcallauPractReactNative/src/commons'
 
 /* COMPONENTS */
 import CharactersList from 'fcallauPractReactNative/src/sections/characters/CharactersList'
+import CharacterView from 'fcallauPractReactNative/src/sections/characters/CharacterView'
 
 /* REDUX */
 import { createStore, applyMiddleware, combineReducers } from 'redux';
@@ -32,10 +33,16 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <Scene key="root">
+          <Scene key="root" title="Marvel Characters">
             <Scene
               key={'CharactersList'}
               component={CharactersList}
+              navigationBarStyle={styles.navBar}
+              navBarButtonColor={'white'}
+            />
+            <Scene
+              key={'CharacterView'}
+              component={CharacterView}
               navigationBarStyle={styles.navBar}
               navBarButtonColor={'white'}
             />

@@ -29,7 +29,7 @@ export default class CharacterCell extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		marginVertical: 10
+		marginVertical: 0
 	},
 	image: {
 		width: Dimensions.get('window').width,

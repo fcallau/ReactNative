@@ -15,11 +15,10 @@ function setCharactersFetching(value){
 	}
 } 
 
-export function updateCharacterSelected(value) {
-	// console.log('CHARACTERS_UPDATE_CHARACTER value: ', value)
+export function updateCharacterSelected(character) {
 	return {
 		type: types.CHARACTERS_UPDATE_CHARACTER,
-		value
+		character: character
 	}
 }
 
