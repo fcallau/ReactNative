@@ -14,7 +14,7 @@ export default class CharacterCell extends Component {
 	render() {
 		const { item, onSelect } = this.props
 
-		let thumbnail = item.thumbnail ? { uri: item.thumbnail.path + '.' + item.thumbnail.extension } : null
+		let thumbnail = item.thumbnail ? { uri: item.thumbnail.path + '.' + item.thumbnail.extension } : require('fcallauPractReactNative/src/resources/placeholder.png')
 
 		return (
 			<TouchableOpacity style={styles.container} onPress={() => onSelect(item)}>

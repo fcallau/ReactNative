@@ -39,3 +39,12 @@ export function fetchCharactersList() {
 			})
 	}
 }
+
+export function postCharacter(data) {
+	return (dispatch, getState) => {
+		dispatch(setCharactersFetching(true))
+
+		// When data from the server is obtained stop spinner
+		dispatch(setCharactersFetching(false))
+	}
+}

@@ -12,7 +12,7 @@ class CharacterView extends Component {
 		console.log('this.props.character: ', this.props.character)
 		const {character} = this.props
 		const name = character ? character.name : ''
-		const thumbnail = character.thumbnail ? { uri: character.thumbnail.path + '.' + character.thumbnail.extension } : null
+		const thumbnail = character.thumbnail ? { uri: character.thumbnail.path + '.' + character.thumbnail.extension } : require('fcallauPractReactNative/src/resources/placeholder.png')
 
 		return (
 			<View style={styles.container}>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 	},
 	image: {
 		width: Dimensions.get('window').width,
-		height: Dimensions.get('window').width / 1.1
+		height: Dimensions.get('window').width
 	},
 	textContainer: {
 		alignItems: 'center',

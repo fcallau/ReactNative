@@ -53,5 +53,11 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>would like access to your photo gallery</string>
+  <key>NSCameraUsageDescription</key>
+  <string>would like to use your camera</string>
+  <key>NSPhotoLibraryAddUsageDescription</key>
+  <string>would like to save photos to your photo gallery</string>
 </dict>
 </plist>
