@@ -2,17 +2,14 @@ import React, { Component } from 'react'
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator, Dimensions } from 'react-native'
 import { Actions } from 'react-native-router-flux';
 
-// import axios from 'axios'
-// import marvelApi from 'marvel-comics-api'
-// import { AsyncCalls, Colors } from 'fcallauPractReactNative/src/commons'
-// import * as constants from 'fcallauPractReactNative/src/webservices/constants'
-// import { fetch } from 'fcallauPractReactNative/src/webservices/webservices'
 import CharacterCell from './CharacterCell'
 import { Colors } from 'fcallauPractReactNative/src/commons'
 
 // Redux
 import { connect } from 'react-redux'
 import * as CharactersActions from 'fcallauPractReactNative/src/redux/actions/characters'
+
+var Spinner = require('react-native-spinkit');
 
 let activityIndicatorWidth = 0
 let activityIndicatorHeight = 0
@@ -33,25 +30,19 @@ class CharactersList extends Component {
 	}
 
 	renderHeader() {
-		return <ActivityIndicator
+		return <Spinner
+			style={styles.spinner}
+			isVisible={this.props.isFetching}
+			size={100}
+			type={'Arc'}
+		/>
+
+		/*return <ActivityIndicator
 			onLayout={(event) => this.measureActivityIndicator(event)}
 			animating={this.props.isFetching}
 			size="large" color="grey"
 			style={styles.activityIndicator}
-		/>
-
-		if (this.props.isFetching) {
-			<View>
-				<ActivityIndicator
-					animating={this.props.isFetching}
-					size="large"
-					color="#0000ff"
-					style={{ marginVertical: 20 }}
-				/>
-			</View>
-		} else {
-			return null
-		}
+		/>*/
 	}
 
 	renderItem(item, index) {
@@ -62,7 +53,7 @@ class CharactersList extends Component {
 			/>
 		)
 	}
-
+	/*<Spinner style={styles.spinner} isVisible={this.state.isVisible} size={this.state.size} type={type} color={this.state.color} />*/
 	render() {
 		return (
 			<View style={styles.container}>
@@ -111,5 +102,11 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		left: Dimensions.get('window').width / 2 - 18,
 		top: Dimensions.get('window').height / 2 - 18 - 20
+	},
+	spinner: {
+		position: 'absolute',
+		left: Dimensions.get('window').width / 2 - 50,
+		top: Dimensions.get('window').height / 2 - 50 - 20,
+		color: Colors.white
 	},
 })
