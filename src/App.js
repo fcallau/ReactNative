@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import { Actions, Scene, Router } from 'react-native-router-flux';
 
-import CharactersList from 'fcallauPractReactNative/src/sections/characters/CharactersList'
 import * as webservices from 'fcallauPractReactNative/src/webservices/webservices'
+import { Colors } from 'fcallauPractReactNative/src/commons'
+
+/* COMPONENTS */
+import CharactersList from 'fcallauPractReactNative/src/sections/characters/CharactersList'
 
 /* REDUX */
 import { createStore, applyMiddleware, combineReducers } from 'redux';
@@ -33,7 +36,8 @@ export default class App extends Component {
             <Scene
               key={'CharactersList'}
               component={CharactersList}
-              hideNavBar
+              navigationBarStyle={styles.navBar}
+              navBarButtonColor={'white'}
             />
           </Scene>
         </Router>
@@ -44,5 +48,7 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
-
+  navBar: {
+    backgroundColor: Colors.navBar,
+  }
 });

@@ -15,6 +15,7 @@ export function fetch(url) {
 		axios.get(urlWithPublicApiKey)
 			.then(response => {
 				if (response.data) {
+					console.log('response.data: ', response.data)
 					resolve(response.data)
 				} else {
 					reject(response)
